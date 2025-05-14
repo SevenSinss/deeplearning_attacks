@@ -1,3 +1,5 @@
+setuptools>=65.5.0
+wheel
 --extra-index-url https://download.pytorch.org/whl/cpu
 
 altair==5.4.1
