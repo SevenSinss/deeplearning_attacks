@@ -82,9 +82,16 @@ def custom_pgd_attack(x, target, decoder, config, progress_bar=None, status_text
 
 
 # 加载模型
-path_smallmodel_tiny = "./modelgpu_tiny_all_60poch.pth"
+# path_smallmodel_tiny = "./modelgpu_tiny_all_60poch.pth"
+# if not os.path.exists(path_smallmodel_tiny):
+#     st.error("模型文件 './modelgpu_tiny_all_60poch.pth' 不存在，请检查路径！")
+#     st.stop()
+# 获取 GUI.py 所在目录
+base_dir = os.path.dirname(os.path.abspath(__file__))
+path_smallmodel_tiny = os.path.join(base_dir, "modelgpu_tiny_all_60poch.pth")
+
 if not os.path.exists(path_smallmodel_tiny):
-    st.error("模型文件 './modelgpu_tiny_all_60poch.pth' 不存在，请检查路径！")
+    st.error(f"模型文件 '{path_smallmodel_tiny}' 不存在，请检查路径！")
     st.stop()
 
 try:
