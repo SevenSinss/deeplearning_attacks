@@ -1,28 +1,8 @@
 import torch
-import torchvision
-import torch.nn as nn
 import torch.nn.functional as F
-import matplotlib.pyplot as plt
-import matplotlib
 from torchvision import transforms, utils, datasets
-from torch.utils.data import Dataset, DataLoader
-import os
-import numpy as np
-import time
-import random
-import datetime
-import codecs
-import argparse
-import dataUtils as data
-from utils import *
-from attacks import *
 from models.AEmodels import *
-import torchvision.transforms
-import pytorch_ssim  # [0,1]
-from torch import optim
 from PIL import Image, ImageFile
-import cv2
-import tqdm
 import streamlit as st
 import logging
 
@@ -153,11 +133,11 @@ if selected_option == "发送方":
             col1, col2 = st.columns(2)
             with col1:
                 st.subheader("上传的 C 图像")
-                st.image(c_image, caption='上传的 C 图像', use_column_width=True)
+                st.image(c_image, caption='上传的 C 图像', use_container_width=True)
 
             with col2:
                 st.subheader("上传的 S 图像")
-                st.image(s_image, caption='上传的 S 图像', use_column_width=True)
+                st.image(s_image, caption='上传的 S 图像', use_container_width=True)
 
             # 处理图像并显示结果
             if st.button("隐写并发送"):
@@ -179,12 +159,12 @@ if selected_option == "发送方":
                     with col3:
                         st.subheader("隐写后的容器图像 C’(已嵌入秘密图像)")
                         st.image(transforms.ToPILImage()(output_c_tensor.squeeze().cpu().data / 2 + 0.5).convert('RGB'),
-                                 caption='隐写后的容器图像 C’(已嵌入秘密图像)', use_column_width=True)
+                                 caption='隐写后的容器图像 C’(已嵌入秘密图像)', use_container_width=True)
 
                     with col4:
                         st.subheader("从容器图像 C’ 中恢复的秘密图像 S’")
                         st.image(transforms.ToPILImage()(output_s_tensor.squeeze().cpu().data / 2 + 0.5).convert('RGB'),
-                                 caption='从容器图像 C’ 中恢复的秘密图像 S’', use_column_width=True)
+                                 caption='从容器图像 C’ 中恢复的秘密图像 S’', use_container_width=True)
         except Exception as e:
             st.error(f"处理上传图像失败：{str(e)}")
             logger.error(f"处理上传图像失败：{str(e)}")
